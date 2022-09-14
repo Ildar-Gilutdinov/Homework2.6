@@ -6,20 +6,20 @@ import java.util.Queue;
 public class Main {
     public static void main(String[] args) {
         System.out.println("Программа очереди на аттракцион");
-        Queue<Person> List = new LinkedList<>();
+        Queue<Person> list = new LinkedList<>();
         System.out.println("Люди которые стоят в очереди на аттракцион: ");
         generateClients().forEach(System.out::println); //вывод людей из списка
         for (int i = 0; i < generateClients().size(); i++) { //цикл for
-            List.offer((generateClients().get(i))); //добавляем новые элементы из списка generateClients в коллекцию List
+            list.offer((generateClients().get(i))); //добавляем новые элементы из списка generateClients в коллекцию List
         }
         System.out.println("На аттракционе прокатились: ");
-        while (!List.isEmpty()) { // цикл while с проверкой стека на пустоту
-            Person firstPerson = List.poll();
-            System.out.println(firstPerson.name + " " + firstPerson.surName + " прокатился на аттракционе ");
-            int ticket = firstPerson.ticket - 1; //уменьшаем кол-во билетов
-            if (ticket > 0) {
-                firstPerson.ticket = ticket;
-                List.offer(firstPerson);
+        while (!list.isEmpty()) { // цикл while с проверкой стека на пустоту
+            Person firstPerson = list.poll();
+            if (firstPerson.spendTicket()) {
+                System.out.println(firstPerson.getName() + " " + firstPerson.getName() + " прокатился на аттракционе");
+            }
+            if (firstPerson.getTicket() > 0) {
+                list.offer(firstPerson);
             }
         }
         System.out.println("Программа завершина!");
